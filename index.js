@@ -1,5 +1,8 @@
 const express = require('express');
 const app = express();
+var cors = require('cors');
+
+app.use(cors());
 
 app.get('/', function (req, res) {
   res.send('Hello World')
@@ -16,39 +19,19 @@ app.get('/nome', function (req, res) {
   });
 
   app.get('/somma', function (req, res) {
-    let n1;
-    let n2;
-    n1 = req.query.n1;
-    n2 = req.query.n2;
-    let operator = parseInt(n1) + parseInt(n2);
-    res.send('somma ' + operator);
+    res.send(JSON.stringify(req.query.a -(- req.query.b)));
   });
 
   app.get('/sottrazione', function (req, res) {
-    let n1;
-    let n2;
-    n1 = req.query.n1;
-    n2 = req.query.n2;
-    let operator = n1 - n2;
-    res.send('sottrazione' + operator);
+    res.send(JSON.stringify(req.query.a - req.query.b));
   });
 
   app.get('/moltiplicazione', function (req, res) {
-    let n1;
-    let n2;
-    n1 = req.query.n1;
-    n2 = req.query.n2;
-    let operator = n1 * n2;
-    res.send('moltiplicazione' + operator);
+    res.send(JSON.stringify(req.query.a * req.query.b));
   });
 
   app.get('/divisione', function (req, res) {
-    let n1;
-    let n2;
-    n1 = req.query.n1;
-    n2 = req.query.n2;
-    let operator = n1 / n2;
-    res.send('divisione' + operator);
+    res.send(JSON.stringify(req.query.a / req.query.b));
   });
 // tutto maiuscolo
   app.get('/upperCase', function (req, res) {
