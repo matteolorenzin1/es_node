@@ -1,3 +1,4 @@
+const axios = require('axios');
 const express = require('express');
 const app = express();
 var cors = require('cors');
@@ -40,6 +41,23 @@ app.get('/nome', function (req, res) {
     var x = nome.toString().toUpperCase();
     res.send('ciao ' + x);
   });
+
+  app.get('/meteo', function (req, res) {
+    res.send("coordinate ", req.query.lat, req.query.lon);
+    axios.get("https://api.openweathermap.org/data/2.5/weather?lat="+
+    req.query.lat+
+    "&lon="+
+    req.query.lon+
+    "&appid=1c7ba3c288da024c7ab46f2f38e24015" )
+    .then(function(response){
+      res.send(response.data.weather[0].description);
+      console.log(response.data);
+    })
+    .catch(function(error){
+      console.log(error);
+    });
+  });
+
 
 app.listen(3000);
 
