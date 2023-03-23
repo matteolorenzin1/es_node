@@ -43,7 +43,7 @@ app.get('/nome', function (req, res) {
   });
 
   app.get('/meteo', function (req, res) {
-    res.send("coordinate ", req.query.lat, req.query.lon);
+    // res.send("coordinate " +req.query.lat + " "+ req.query.lon);
     axios.get("https://api.openweathermap.org/data/2.5/weather?lat="+
     req.query.lat+
     "&lon="+
