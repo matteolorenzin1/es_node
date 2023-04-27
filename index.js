@@ -63,21 +63,32 @@ app.get('/nome', function (req, res) {
     });
   });
 
-  var connection = mysql.createConnection({
-    host     : process.env.HOST,
-    user     : process.env.USER,
-    password : process.env.PASSWORD,
-    database : process.env.DATABASE
+
+  app.get('/login', function (req, res) {
+    var x;
+    var connection = mysql.createConnection({
+      host     : process.env.HOST,
+      user     : process.env.USER,
+      password : process.env.PASSWORD,
+      database : process.env.DATABASE
+    });
+  
+    connection.connect();
+
+    connection.query('SELECT nome, psw FROM utente', function (error, results, fields) {
+      console.log( "error ", error );
+      console.log("results", results );
+      console.log("fields", fields );
+      if (error) throw error;
+      console.log('The solution is: ', results[0]);
+      if (results[0].nome == req.query.nome && results[0].psw == req.query.psw)
+      )
+    });
+     
+    connection.end();
+    res.send("I");
   });
-   
-  connection.connect();
-   
-  connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
-    if (error) throw error;
-    console.log('The solution is: ', results[0].solution);
-  });
-   
-  connection.end();
+
 
 
 app.listen(3000);
