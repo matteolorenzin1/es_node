@@ -2,8 +2,13 @@ const axios = require('axios');
 const express = require('express');
 const app = express();
 var cors = require('cors');
+var mysql = require('mysql');
+
+require('dotenv').config()
+// console.log(process.env) // remove this after you've confirmed it is working
 
 app.use(cors());
+
 
 app.get('/', function (req, res) {
   res.send('Hello World')
@@ -57,6 +62,22 @@ app.get('/nome', function (req, res) {
       console.log(error);
     });
   });
+
+  var connection = mysql.createConnection({
+    host     : process.env.HOST,
+    user     : process.env.USER,
+    password : process.env.PASSWORD,
+    database : process.env.DATABASE
+  });
+   
+  connection.connect();
+   
+  connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+    if (error) throw error;
+    console.log('The solution is: ', results[0].solution);
+  });
+   
+  connection.end();
 
 
 app.listen(3000);
