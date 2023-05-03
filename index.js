@@ -81,8 +81,10 @@ app.get('/nome', function (req, res) {
       console.log("fields", fields );
       if (error) throw error;
       console.log('The solution is: ', results[0]);
-      if (results[0].nome == req.query.nome && results[0].psw == req.query.psw)
-      )
+      if (results[0].nome == req.query.nome && results[0].psw == req.query.psw){
+        
+      }
+      
     });
      
     connection.end();
